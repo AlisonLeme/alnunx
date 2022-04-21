@@ -1,0 +1,17 @@
+.toobar {
+    display: flex;
+    justify-content: space-between
+}
+
+.userNam {
+    margin-left: 5;
+}
+
+.avatar {
+    width: 35;
+    height: 35;
+}
+
+.divider {
+    margin: '8px 0';
+}
