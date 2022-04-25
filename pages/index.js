@@ -48,7 +48,7 @@ export default function Home() {
 						<Typography component='h2' variant='h4' align='center' gutterBottom>
 							Destaques
 						</Typography>
-						<Grid container spacing='4' className={styles.grid}>
+						<Grid container spacing={4} className={styles.grid}>
 							<Link href='#'>
 								<Grid item xs={12} sm={6} md={4}>
 									<Card className={styles.card}>
