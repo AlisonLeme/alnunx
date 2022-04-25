@@ -29,7 +29,7 @@ export default function Home() {
 
 			<main>
 				<TemplateDefault>
-					<Container maxWidth="md" className={styles.searchContainer}>
+					<Container maxWidth="lg" className={styles.searchContainer}>
 						<Typography component="h1" variant='h3' align='center'>
 							O que deseja encontrar?
 						</Typography>
@@ -44,7 +44,7 @@ export default function Home() {
 						</Paper>
 					</Container>
 
-					<Container maxWidth='md' className={styles.cardGrid}>
+					<Container maxWidth='lg' className={styles.cardGrid}>
 						<Typography component='h2' variant='h4' align='center' gutterBottom>
 							Destaques
 						</Typography>
