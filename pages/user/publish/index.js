@@ -12,7 +12,8 @@ import {
   Select,
   Typography,
   MenuItem,
-  IconButton
+  IconButton,
+  InputAdornment
 } from '@mui/material';
 
 import TemplateDefault from '../../../src/templates/default/Default';
@@ -224,6 +225,7 @@ const Publish = () => {
                       <OutlinedInput
                         name='price'
                         onChange={handleChange}
+                        startAdornment={<InputAdornment position='start'>R$</InputAdornment>}
                         variant='outlined'
                         label='Ex..: 20000'
                       />
