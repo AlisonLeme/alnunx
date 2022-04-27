@@ -29,18 +29,18 @@ export default function Home() {
 
 			<main>
 				<TemplateDefault>
-					<Container maxWidth="lg" className={styles.searchContainer}>
+					<Container maxWidth="md" className={styles.searchContainer}>
 						<Typography component="h1" variant='h3' align='center'>
 							O que deseja encontrar?
 						</Typography>
 						<Paper className={styles.searchPaper}>
-						<InputBase
-							placeholder='ex: iPhone 12 com garantia'
-							fullWidth
-						/>
-						<IconButton>
-							<SearchIcon />
-						</IconButton>
+							<InputBase
+								placeholder='ex: iPhone 12 com garantia'
+								fullWidth
+							/>
+							<IconButton>
+								<SearchIcon />
+							</IconButton>
 						</Paper>
 					</Container>
 
@@ -49,7 +49,7 @@ export default function Home() {
 							Destaques
 						</Typography>
 						<Grid container spacing={4} className={styles.grid}>
-							<Link href='#'>
+							<Link href='#' passHref>
 								<Grid item xs={12} sm={6} md={4}>
 									<Card className={styles.card}>
 										<CardMedia
@@ -69,7 +69,7 @@ export default function Home() {
 								</Grid>
 							</Link>
 
-							<Link href='#'>
+							<Link href='#' passHref>
 								<Grid item xs={12} sm={6} md={4}>
 									<Card className={styles.card}>
 										<CardMedia
@@ -89,7 +89,7 @@ export default function Home() {
 								</Grid>
 							</Link>
 
-							<Link href='#'>
+							<Link href='#' passHref>
 								<Grid item xs={12} sm={6} md={4}>
 									<Card className={styles.card}>
 										<CardMedia
