@@ -2,9 +2,6 @@ import Link from 'next/link';
 import Head from "next/head";
 
 import {
-  Card,
-  CardContent,
-  CardMedia,
   Container,
   Grid,
   IconButton,
@@ -16,6 +13,8 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 
 import TemplateDefault from '../src/templates/default/Default'
+
+import Card from '../src/components/card/Card';
 
 import styles from "../styles/Home.module.css";
 
@@ -51,61 +50,34 @@ export default function Home() {
 						<Grid container spacing={4} className={styles.grid}>
 							<Link href='#' passHref>
 								<Grid item xs={12} sm={6} md={4}>
-									<Card className={styles.card}>
-										<CardMedia
-										className={styles.cardMedia}
+									<Card
+										url={''}
 										image={'https://source.unsplash.com/random'}
-										title="Titulo da imagem"
-										/>
-										<CardContent>
-										<Typography variant="h5" component="h2">
-											Produto x
-										</Typography>
-										<Typography variant="h5" component="h2">
-											R$ 60,00
-										</Typography>
-										</CardContent>
-									</Card>
+										title='Produto X'
+										subtitle='R$ 90,00'
+									/>
 								</Grid>
 							</Link>
 
 							<Link href='#' passHref>
 								<Grid item xs={12} sm={6} md={4}>
-									<Card className={styles.card}>
-										<CardMedia
-										className={styles.cardMedia}
+									<Card
+										url={''}
 										image={'https://source.unsplash.com/random'}
-										title="Titulo da imagem"
-										/>
-										<CardContent>
-										<Typography variant="h5" component="h2">
-											Produto x
-										</Typography>
-										<Typography variant="h5" component="h2">
-											R$ 60,00
-										</Typography>
-										</CardContent>
-									</Card>
+										title='Produto X'
+										subtitle='R$ 90,00'
+									/>
 								</Grid>
 							</Link>
-
+							
 							<Link href='#' passHref>
 								<Grid item xs={12} sm={6} md={4}>
-									<Card className={styles.card}>
-										<CardMedia
-										className={styles.cardMedia}
+									<Card
+										url={''}
 										image={'https://source.unsplash.com/random'}
-										title="Titulo da imagem"
-										/>
-										<CardContent>
-										<Typography variant="h5" component="h2">
-											Produto x
-										</Typography>
-										<Typography variant="h5" component="h2">
-											R$ 60,00
-										</Typography>
-										</CardContent>
-									</Card>
+										title='Produto X'
+										subtitle='R$ 90,00'
+									/>
 								</Grid>
 							</Link>
 						</Grid>

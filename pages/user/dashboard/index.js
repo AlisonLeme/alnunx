@@ -1,15 +1,15 @@
+import Link from 'next/link';
+
 import {
     Button,
-    Card,
-    CardActions,
-    CardContent,
-    CardMedia,
     Container,
     Grid,
     Typography,
   } from '@mui/material';
 
 import TemplateDefault from '../../../src/templates/default/Default';
+
+import Card from '../../../src/components/card/Card';
 
 import styles from './dashboard.module.css'
 
@@ -26,81 +26,68 @@ const dashboard = () => {
             </Container>
             <Container maxWidth='lg'>
                 <Grid container spacing={4}>
-                    <Grid item xs={12} sm={6} md={4}>
-                        <Card>
-                            <CardMedia
-                                className={styles.cardMedia}
-                                image='https://source.unsplash.com/random'
-                                title="Titúlo imagem"
+                    <Link href='#' passHref>
+                        <Grid item xs={12} sm={6} md={4}>
+                            <Card
+                                url={''}
+                                image={'https://source.unsplash.com/random'}
+                                title='Produto X'
+                                subtitle='R$ 90,00'
+                                actions={
+                                    <>
+                                        <Button size='small' color='primary'>
+                                            Editar
+                                        </Button>
+                                        <Button size='small' color='primary'>
+                                            Remover
+                                        </Button>
+                                    </>
+                                }
                             />
-                            <CardContent>
-                                <Typography variant='h5' component='h2'>
-                                    Produto X
-                                </Typography>
-                                <Typography variant='h5' component='h2'>
-                                    R$ 50,00
-                                </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <Button size='small' color='primary'>
-                                    Editar
-                                </Button>
-                                <Button size='small' color='primary'>
-                                    Remover
-                                </Button>
-                            </CardActions>
-                        </Card>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={4}>
-                        <Card>
-                            <CardMedia
-                                className={styles.cardMedia}
-                                image='https://source.unsplash.com/random'
-                                title="Titúlo imagem"
+                        </Grid>
+                    </Link>
+
+                    <Link href='#' passHref>
+                        <Grid item xs={12} sm={6} md={4}>
+                            <Card
+                                url={''}
+                                image={'https://source.unsplash.com/random'}
+                                title='Produto X'
+                                subtitle='R$ 90,00'
+                                actions={
+                                    <>
+                                        <Button size='small' color='primary'>
+                                            Editar
+                                        </Button>
+                                        <Button size='small' color='primary'>
+                                            Remover
+                                        </Button>
+                                    </>
+                                }
                             />
-                            <CardContent>
-                                <Typography variant='h5' component='h2'>
-                                    Produto X
-                                </Typography>
-                                <Typography variant='h5' component='h2'>
-                                    R$ 50,00
-                                </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <Button size='small' color='primary'>
-                                    Editar
-                                </Button>
-                                <Button size='small' color='primary'>
-                                    Remover
-                                </Button>
-                            </CardActions>
-                        </Card>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={4}>
-                        <Card>
-                            <CardMedia
-                                className={styles.cardMedia}
-                                image='https://source.unsplash.com/random'
-                                title="Titúlo imagem"
+                        </Grid>
+                    </Link>
+                    
+                    <Link href='#' passHref>
+                        <Grid item xs={12} sm={6} md={4}>
+                            <Card
+                                url={''}
+                                image={'https://source.unsplash.com/random'}
+                                title='Produto X'
+                                subtitle='R$ 90,00'
+                                actions={
+                                    <>
+                                        <Button size='small' color='primary'>
+                                            Editar
+                                        </Button>
+                                        <Button size='small' color='primary'>
+                                            Remover
+                                        </Button>
+                                    </>
+                                }
                             />
-                            <CardContent>
-                                <Typography variant='h5' component='h2'>
-                                    Produto X
-                                </Typography>
-                                <Typography variant='h5' component='h2'>
-                                    R$ 50,00
-                                </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <Button size='small' color='primary'>
-                                    Editar
-                                </Button>
-                                <Button size='small' color='primary'>
-                                    Remover
-                                </Button>
-                            </CardActions>
-                        </Card>
-                    </Grid>
+                        </Grid>
+                    </Link>
                 </Grid>
             </Container>
       </TemplateDefault>
