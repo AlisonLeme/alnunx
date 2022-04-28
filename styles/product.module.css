@@ -4,6 +4,14 @@
     margin-bottom: 30px;
 }
 
+.card {
+    height: 100%;
+}
+
+.cardMedia {
+    padding-top: 56%;
+}
+
 .productName {
     margin: 15px 0;
 }
