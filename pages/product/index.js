@@ -12,9 +12,9 @@ import {
     CardMedia
 } from '@mui/material'
 
-import TemplateDefault from '../src/templates/default/Default'
+import TemplateDefault from '../../src/templates/default/Default'
 
-import styles from '../styles/product.module.css'
+import styles from './product.module.css'
 
 const Product = () => {
     return (

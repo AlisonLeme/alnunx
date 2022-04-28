@@ -51,7 +51,6 @@ export default function Home() {
 							<Link href='#' passHref>
 								<Grid item xs={12} sm={6} md={4}>
 									<Card
-										url={''}
 										image={'https://source.unsplash.com/random'}
 										title='Produto X'
 										subtitle='R$ 90,00'
@@ -62,7 +61,6 @@ export default function Home() {
 							<Link href='#' passHref>
 								<Grid item xs={12} sm={6} md={4}>
 									<Card
-										url={''}
 										image={'https://source.unsplash.com/random'}
 										title='Produto X'
 										subtitle='R$ 90,00'
@@ -73,7 +71,6 @@ export default function Home() {
 							<Link href='#' passHref>
 								<Grid item xs={12} sm={6} md={4}>
 									<Card
-										url={''}
 										image={'https://source.unsplash.com/random'}
 										title='Produto X'
 										subtitle='R$ 90,00'
