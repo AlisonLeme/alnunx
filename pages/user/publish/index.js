@@ -1,5 +1,4 @@
 import { Formik } from 'formik';
-import { useDropzone } from 'react-dropzone';
 
 import {
   Box,
@@ -12,13 +11,12 @@ import {
   Select,
   Typography,
   MenuItem,
-  IconButton,
   InputAdornment
 } from '@mui/material';
 
 import TemplateDefault from '../../../src/templates/default/Default';
+import FileUpload from '../../../src/components/fileUpload/FileUpload';
 import { initialValues, validationSchema } from './formValues';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 import styles from './publish.module.css';
 
@@ -30,7 +28,7 @@ const Publish = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(values) => {
-          console.log(values);
+          console.log(values)
         }}
       >
         {
@@ -42,31 +40,6 @@ const Publish = () => {
             handleSubmit,
             setFieldValue,
           }) => {
-            
-            const { getRootProps, getInputProps } = useDropzone({
-              accept: 'image/*',
-          
-              onDrop: (acceptedFile) => {
-                const newFiles = acceptedFile.map((file) => {
-                  return Object.assign(file, {
-                    preview: URL.createObjectURL(file)
-                  });
-                });
-          
-                setFieldValue('files', [
-                  ...values.files,
-                  ...newFiles,
-                ]);
-              }
-            });
-          
-            const handleRemoveFile = (fileName) => {
-              const newFileState = values.files.filter((file) => {
-                return file.name !== fileName
-              });
-          
-              setFieldValue('files', newFileState);
-            }
 
             return (
               <form onSubmit={handleSubmit}>
@@ -82,7 +55,7 @@ const Publish = () => {
                 <Container maxWidth='md' className={styles.boxContainer}>
                   <Box className={styles.box}>
                     <Typography component='h6' variant='h6' color='primary' gutterBottom className={styles.title}>
-                        Titulo do Anúncio
+                      Titulo do Anúncio
                     </Typography>
                     <FormControl fullWidth variant='outlined' error={errors.title && touched.title}>
                       <InputLabel>
@@ -96,12 +69,12 @@ const Publish = () => {
                       >
                       </OutlinedInput>
                       <FormHelperText>
-                        { errors.title && touched.title ? errors.title : null }
+                        {errors.title && touched.title ? errors.title : null}
                       </FormHelperText>
                     </FormControl>
 
                     <Typography component='h6' variant='h6' color='primary' gutterBottom className={styles.title}>
-                        Categoria
+                      Categoria
                     </Typography>
                     <FormControl fullWidth variant='outlined' error={errors.category && touched.category}>
                       <InputLabel>
@@ -131,7 +104,7 @@ const Publish = () => {
                         <MenuItem value="Outros">Outros</MenuItem>
                       </Select>
                       <FormHelperText>
-                        { errors.category && touched.category ? errors.category : null }
+                        {errors.category && touched.category ? errors.category : null}
                       </FormHelperText>
                     </FormControl>
                   </Box>
@@ -139,55 +112,12 @@ const Publish = () => {
 
                 <Container maxWidth='md' className={styles.boxContainer}>
                   <Box className={styles.box}>
-                    <Typography component='h6' variant='h6' color='primary' gutterBottom className={styles.title}>
-                          Imagens
-                    </Typography>
-                    <Typography component='div' variant='body2' gutterBottom color={errors.files && touched.files ? 'error' : 'inherit'}>
-                          A primeira imagem é a foto principal do seu anúncio.
-                    </Typography>
-                    {
-                      errors.files && touched.files
-                        ? < Typography variant='body2' color='error' gutterBottom>{errors.files}</Typography>
-                        : null
-                    }
-                    <Box className={styles.thumbsContainer}>
-                      <Box className={styles.dropzone} {...getRootProps()}>
-                        <input {...getInputProps()}/>
-                        <Typography variant='body2' color={errors.files && touched.files ? 'error' : 'inherit'}>
-                          Clique para adicionar ou arraste uma imagem
-                        </Typography>
-                      </Box>
-
-                      {
-                        values.files.map((file, index) => {
-                          return (
-                            <Box
-                              key={file.name}
-                              className={styles.thumb}
-                              style={{ backgroundImage: `url(${file.preview})` }}
-                            >
-
-                              {
-                                index === 0 ?
-                                  <Box className={styles.mainImage}>
-                                    <Typography variant='body2'>
-                                      Principal
-                                    </Typography>
-                                  </Box>
-                                  : null
-                              }
-
-                              <Box className={styles.mask}>
-                                <IconButton onClick={() => handleRemoveFile(file.name)}>
-                                  <DeleteForeverIcon fontSize='large' color='primary'/>
-                                </IconButton>
-                              </Box>
-
-                            </Box>
-                          )
-                        })
-                      }
-                    </Box>
+                   <FileUpload
+                    files={values.files}
+                    errors={errors.files}
+                    touched={touched.files}
+                    setFieldValue={setFieldValue}
+                   />
                   </Box>
                 </Container>
 
@@ -202,6 +132,8 @@ const Publish = () => {
                       </InputLabel>
                       <OutlinedInput
                         name='description'
+                        multiline
+                        rows={6}
                         onChange={handleChange}
                         variant='outlined'
                         label='Escrevva os detalhes do que está vendendo'
