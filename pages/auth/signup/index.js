@@ -1,3 +1,7 @@
+import { Formik } from 'formik';
+import axios from 'axios';
+import { useRouter } from 'next/dist/client/router';
+
 import {
     Box,
     Container,
@@ -11,21 +15,19 @@ import {
     CircularProgress,
 } from '@mui/material';
 
-import { Formik } from 'formik';
-//import { useRouter } from 'next/dist/client/router';
 
-import { initialValues, validationSchema } from './formValues';
 import TemplateDefalut from '../../../src/templates/default/Default';
-//import useToasty from '../../src/contexts/Toasty';
+import { initialValues, validationSchema } from './formValues';
+import useToasty from '../../../src/contexts/Toasty';
 
 import styles from './signup.module.css'
 
 const Signup = () => {
-    //const router = useRouter();
-    // trazendo o valor que ele está injetando dentro da nossa aplicação
-    //const { setToasty } = useToasty();
+    const router = useRouter();
 
-    /*
+    // trazendo o valor que ele está injetando dentro da nossa aplicação
+    const { setToasty } = useToasty();
+
     const handleFormSubmit = async (values) => {
         const response = await axios.post('/api/users', values);
 
@@ -37,10 +39,9 @@ const Signup = () => {
             })
 
             //redirecionar o usuario para a página de login
-            router.push('/auth/signin');
+            router.push('/user/dashboard');
         }
     }
-    */
 
     return (
         <TemplateDefalut>
@@ -56,9 +57,7 @@ const Signup = () => {
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
-                onSubmit={(values) => {
-                    console.log(values)
-                }}
+                onSubmit={handleFormSubmit}
             >
                 {
                     ({
