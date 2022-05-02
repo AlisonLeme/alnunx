@@ -73,7 +73,7 @@ const Signup = () => {
                             <form onSubmit={handleSubmit}>
                                 <Container maxWidth="md">
                                     <Box className={styles.box}>
-                                        <FormControl className={styles.formControl} error={errors.name && touched.name} fullWidth>
+                                        <FormControl variant='standard' className={styles.formControl} error={errors.name && touched.name} fullWidth>
                                             <InputLabel>Nome</InputLabel>
                                             <Input
                                                 name="name"
@@ -85,7 +85,7 @@ const Signup = () => {
                                             </FormHelperText>
                                         </FormControl>
 
-                                        <FormControl className={styles.formControl} error={errors.email && touched.email} fullWidth>
+                                        <FormControl variant='standard' className={styles.formControl} error={errors.email && touched.email} fullWidth>
                                             <InputLabel>E-mail</InputLabel>
                                             <Input
                                                 name="email"
@@ -98,7 +98,7 @@ const Signup = () => {
                                             </FormHelperText>
                                         </FormControl>
 
-                                        <FormControl className={styles.formControl} error={errors.password && touched.password} fullWidth>
+                                        <FormControl variant='standard' className={styles.formControl} error={errors.password && touched.password} fullWidth>
                                             <InputLabel>Senha</InputLabel>
                                             <Input
                                                 name="password"
@@ -111,7 +111,7 @@ const Signup = () => {
                                             </FormHelperText>
                                         </FormControl>
 
-                                        <FormControl className={styles.formControl} error={errors.passwordConf && touched.passwordConf} fullWidth>
+                                        <FormControl variant='standard' className={styles.formControl} error={errors.passwordConf && touched.passwordConf} fullWidth>
                                             <InputLabel>Confirmação de senha</InputLabel>
                                             <Input
                                                 name="passwordConf"
