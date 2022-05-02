@@ -1,0 +1,22 @@
+.box {
+    background-color: rgb(247, 247, 247);
+    padding: 30px;
+    margin-top: 30px;
+}
+
+.formControl {
+    margin-top: 5px;
+}
+
+.button {
+    margin-top: 30px;
+    margin-bottom: 30px
+}
+
+.loading {
+    display: block;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto
+}
