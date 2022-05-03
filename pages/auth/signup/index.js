@@ -39,7 +39,7 @@ const Signup = () => {
             })
 
             //redirecionar o usuario para a página de login
-            router.push('/user/dashboard');
+            router.push('/auth/signin');
         }
     }
 

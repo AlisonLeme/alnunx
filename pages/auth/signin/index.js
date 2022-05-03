@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import { Formik } from 'formik';
-import axios from 'axios';
 import { useRouter } from 'next/dist/client/router';
+import { useSession, signIn } from "next-auth/react"
 
 import {
     Box,
@@ -13,6 +14,7 @@ import {
     Button,
     Link,
     CircularProgress,
+    Alert
 } from '@mui/material';
 
 
@@ -27,8 +29,30 @@ const Signin = () => {
 
     // trazendo o valor que ele está injetando dentro da nossa aplicação
     const { setToasty } = useToasty();
+    const { data: session } = useSession()
+    const [alert, setAlert] = useState(false)
+
+    console.log(session)
 
     const handleFormSubmit = async (values) => {
+        await signIn('credentials', {
+            email: values.email,
+            password: values.password,
+            redirect: false,
+        })
+        .then( async ({ error }) => {
+            if(error) {
+                setAlert(true)
+                setToasty({
+                    open: true,
+                    severity: 'error',
+                    text: 'E-mail ou senhas inválidos',
+                })
+            }else {
+                setAlert(false)
+                router.push('/user/dashboard')
+            }
+        })
     }
 
     return (
@@ -57,6 +81,15 @@ const Signin = () => {
                         return (
                             <form onSubmit={handleSubmit}>
                                 <Container maxWidth="md">
+                                    {
+                                        alert
+                                            ? (
+                                                <Alert severity='error' className={styles.errorMessage}>
+                                                    E-mail ou senha inválidos
+                                                </Alert>
+                                            )
+                                            : null
+                                    }
                                     <Box className={styles.box}>
 
                                         <FormControl variant='standard' className={styles.formControl} error={errors.email && touched.email} fullWidth>
@@ -97,7 +130,7 @@ const Signin = () => {
                                                 )
                                         }
 
-                                        <Link href="/auth/signup" passHref>
+                                        <Link href="/auth/signup">
                                             <Typography align="left" color="textPrimary">
                                                 Não tem uma conta? Crie aqui
                                             </Typography>
