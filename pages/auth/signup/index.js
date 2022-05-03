@@ -136,7 +136,7 @@ const Signup = () => {
                                                 )
                                         }
 
-                                        <Link href="/auth/signin" passHref>
+                                        <Link href="/auth/signin">
                                             <Typography align="left" color="textPrimary">
                                                 Já tem uma conta? Entre aqui
                                             </Typography>

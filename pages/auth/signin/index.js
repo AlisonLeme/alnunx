@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Formik } from 'formik';
 import { useRouter } from 'next/dist/client/router';
 import { useSession, signIn } from "next-auth/react"
+import Image from 'next/image';
 
 import {
     Box,
@@ -33,6 +34,12 @@ const Signin = () => {
     const [alert, setAlert] = useState(false)
 
     console.log(session)
+
+    const handleGoogleLogin = async () => {
+        await signIn('google', {
+            callbackUrl: 'http://localhost:3000/user/dashboard'
+        })
+    }
 
     const handleFormSubmit = async (values) => {
         await signIn('credentials', {
@@ -91,6 +98,21 @@ const Signin = () => {
                                             : null
                                     }
                                     <Box className={styles.box}>
+                                        <Box display='flex' justifyContent='center'>
+                                            <Button 
+                                                variant='contained'
+                                                startIcon={
+                                                    <Image  alt='Login Google' src='/images/Logo_google.png' width={20} height={20}/>
+                                                }
+                                                onClick={handleGoogleLogin}
+                                            >
+                                                Entrar com Google
+                                            </Button>
+                                        </Box>
+
+                                        <Box className={styles.orSeparator}>
+                                            <span>ou</span>
+                                        </Box>
 
                                         <FormControl variant='standard' className={styles.formControl} error={errors.email && touched.email} fullWidth>
                                             <InputLabel>E-mail</InputLabel>
