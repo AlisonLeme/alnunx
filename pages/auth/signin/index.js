@@ -33,8 +33,6 @@ const Signin = () => {
     const { data: session } = useSession()
     const [alert, setAlert] = useState(false)
 
-    console.log(session)
-
     const handleGoogleLogin = async () => {
         await signIn('google', {
             callbackUrl: 'http://localhost:3000/user/dashboard'
