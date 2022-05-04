@@ -25,7 +25,7 @@ import useToasty from '../../../src/contexts/Toasty';
 
 import styles from './signin.module.css'
 
-const Signin = () => {
+const Signin = ({ APP_URL }) => {
     const router = useRouter();
 
     // trazendo o valor que ele está injetando dentro da nossa aplicação
@@ -35,7 +35,7 @@ const Signin = () => {
 
     const handleGoogleLogin = async () => {
         await signIn('google', {
-            callbackUrl: 'http://localhost:3000/user/dashboard'
+            callbackUrl: `${APP_URL}/user/dashboard`
         })
     }
 
@@ -61,7 +61,7 @@ const Signin = () => {
     }
 
     return (
-        <TemplateDefalut>
+        <TemplateDefalut APP_URL={APP_URL}>
             <Container maxWidth="md">
                 <Typography component="h1" variant="h2" align="center" color="textPrimary">
                     Entre na sua conta
@@ -164,6 +164,14 @@ const Signin = () => {
             </Formik>
         </TemplateDefalut>
     )
+}
+
+export async function getServerSideProps() {
+    return {
+      props: {
+        APP_URL: process.env.APP_URL
+      }
+    }
 }
 
 export default Signin
