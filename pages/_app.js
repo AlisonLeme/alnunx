@@ -9,6 +9,7 @@ import { CacheProvider } from '@emotion/react';
 
 import theme from '../src/theme';
 import createEmotionCache from '../src/createEmotionCache';
+import CheckAuth from '../src/components/checkAuth/CheckAuth';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -25,7 +26,11 @@ export default function MyApp(props) {
 				<ThemeProvider theme={theme}>
 					<ToastyProvider>
 						<CssBaseline />
-						<Component {...pageProps} />
+						{
+							Component.requireAuth
+								? <CheckAuth Component={Component} pageProps={pageProps}/>
+								: <Component {...pageProps} />
+						}
 					</ToastyProvider>
 				</ThemeProvider>
 			</SessionProvider>

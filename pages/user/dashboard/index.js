@@ -13,7 +13,7 @@ import Card from '../../../src/components/card/Card';
 
 import styles from './dashboard.module.css'
 
-const dashboard = () => {
+const Dashboard = () => {
     return (
         <TemplateDefault>
             <Container maxWidth="sm">
@@ -94,4 +94,6 @@ const dashboard = () => {
     )
 }
 
-export default dashboard
+Dashboard.requireAuth = true
+
+export default Dashboard
