@@ -5,15 +5,19 @@ import {
     Container,
     Grid,
     Typography,
-  } from '@mui/material';
+} from '@mui/material';
 
+import { getSession } from 'next-auth/react';
+
+import dbConnect from '../../../src/utils/dbConnect'
+import ProductsModel from '../../../src/models/products'
 import TemplateDefault from '../../../src/templates/default/Default';
-
 import Card from '../../../src/components/card/Card';
 
 import styles from './dashboard.module.css'
 
-const Dashboard = () => {
+const Dashboard = ({ products }) => {
+
     return (
         <TemplateDefault>
             <Container maxWidth="sm">
@@ -26,68 +30,32 @@ const Dashboard = () => {
             </Container>
             <Container maxWidth='lg'>
                 <Grid container spacing={4}>
-                    <Link href='#' passHref>
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Card
-                                url={''}
-                                image={'https://source.unsplash.com/random'}
-                                title='Produto X'
-                                subtitle='R$ 90,00'
-                                actions={
-                                    <>
-                                        <Button size='small' color='primary'>
-                                            Editar
-                                        </Button>
-                                        <Button size='small' color='primary'>
-                                            Remover
-                                        </Button>
-                                    </>
-                                }
-                            />
-                        </Grid>
-                    </Link>
-
-                    <Link href='#' passHref>
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Card
-                                url={''}
-                                image={'https://source.unsplash.com/random'}
-                                title='Produto X'
-                                subtitle='R$ 90,00'
-                                actions={
-                                    <>
-                                        <Button size='small' color='primary'>
-                                            Editar
-                                        </Button>
-                                        <Button size='small' color='primary'>
-                                            Remover
-                                        </Button>
-                                    </>
-                                }
-                            />
-                        </Grid>
-                    </Link>
-                    
-                    <Link href='#' passHref>
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Card
-                                url={''}
-                                image={'https://source.unsplash.com/random'}
-                                title='Produto X'
-                                subtitle='R$ 90,00'
-                                actions={
-                                    <>
-                                        <Button size='small' color='primary'>
-                                            Editar
-                                        </Button>
-                                        <Button size='small' color='primary'>
-                                            Remover
-                                        </Button>
-                                    </>
-                                }
-                            />
-                        </Grid>
-                    </Link>
+                    {
+                        products.map((product) => {
+                            return (
+                                <Link key={product._id} href='#' passHref>
+                                    <Grid item xs={12} sm={6} md={4}>
+                                        <Card
+                                            url={''}
+                                            image={`/uploads/${product.files[0].name}`}
+                                            title={product.title}
+                                            subtitle={product.price}
+                                            actions={
+                                                <>
+                                                    <Button size='small' color='primary'>
+                                                        Editar
+                                                    </Button>
+                                                    <Button size='small' color='primary'>
+                                                        Remover
+                                                    </Button>
+                                                </>
+                                            }
+                                        />
+                                    </Grid>
+                                </Link>
+                            )
+                        })
+                    }
                 </Grid>
             </Container>
       </TemplateDefault>
@@ -95,5 +63,20 @@ const Dashboard = () => {
 }
 
 Dashboard.requireAuth = true
+
+// se beneficiando do next para fazer o carregamento do lado do servidor e trazer como props para o front
+
+export async function getServerSideProps({ req }) {
+    const session = await getSession({ req })
+    await dbConnect()
+
+    const products = await ProductsModel.find({ 'user.id': session.userId })
+
+    return {
+        props: {
+            products: JSON.parse(JSON.stringify(products))
+        }
+    }
+}
 
 export default Dashboard

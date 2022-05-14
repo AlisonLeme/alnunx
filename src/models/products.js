@@ -6,7 +6,7 @@ const filesSchema = Schema({
     path: String
 })
 
-const schema = new mongoose.Schema({
+const schema = Schema({
     title: {
         type: String,
         required: [true, 'O campo "título do anúncio" é obrigatório.']
@@ -36,4 +36,4 @@ const schema = new mongoose.Schema({
     }
 })
 
-export default mongoose.model.products || mongoose.model('products', schema)
+export default mongoose.models.products || mongoose.model('products', schema)
