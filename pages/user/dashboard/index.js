@@ -13,6 +13,7 @@ import dbConnect from '../../../src/utils/dbConnect'
 import ProductsModel from '../../../src/models/products'
 import TemplateDefault from '../../../src/templates/default/Default';
 import Card from '../../../src/components/card/Card';
+import { formatCurrency } from '../../../src/utils/currency';
 
 import styles from './dashboard.module.css'
 
@@ -39,7 +40,7 @@ const Dashboard = ({ products }) => {
                                             url={''}
                                             image={`/uploads/${product.files[0].name}`}
                                             title={product.title}
-                                            subtitle={product.price}
+                                            subtitle={formatCurrency(product.price)}
                                             actions={
                                                 <>
                                                     <Button size='small' color='primary'>
