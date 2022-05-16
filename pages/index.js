@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import Head from "next/head";
+import Link from 'next/link';
+import slugify from "slugify";
 
 import {
   Container,
@@ -13,12 +14,14 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 
 import TemplateDefault from '../src/templates/default/Default'
-
 import Card from '../src/components/card/Card';
+import dbConnect from '../src/utils/dbConnect'
+import ProductsModel from '../src/models/products'
+import { formatCurrency } from '../src/utils/currency'
 
 import styles from "../styles/Home.module.css";
 
-export default function Home() {
+export default function Home({ products }) {
 	return (
 		<>
 			<Head>
@@ -48,39 +51,42 @@ export default function Home() {
 							Destaques
 						</Typography>
 						<Grid container spacing={4} className={styles.grid}>
-							<Link href='#' passHref>
-								<Grid item xs={12} sm={6} md={4}>
-									<Card
-										image={'https://source.unsplash.com/random'}
-										title='Produto X'
-										subtitle='R$ 90,00'
-									/>
-								</Grid>
-							</Link>
+							{
+								products.map((product) => {
+									const category = slugify(product.category).toLowerCase()
+									const title = slugify(product.title).toLowerCase()
 
-							<Link href='#' passHref>
-								<Grid item xs={12} sm={6} md={4}>
-									<Card
-										image={'https://source.unsplash.com/random'}
-										title='Produto X'
-										subtitle='R$ 90,00'
-									/>
-								</Grid>
-							</Link>
-							
-							<Link href='#' passHref>
-								<Grid item xs={12} sm={6} md={4}>
-									<Card
-										image={'https://source.unsplash.com/random'}
-										title='Produto X'
-										subtitle='R$ 90,00'
-									/>
-								</Grid>
-							</Link>
+									return (
+										<Link key={product._id} href={`${category}/${title}/${product._id}`} passHref>
+											<Grid item xs={12} sm={6} md={4}>
+												<Card
+													image={`/uploads/${product.files[0].name}`}
+													title={product.title}
+													subtitle={formatCurrency(product.price)}
+												/>
+											</Grid>
+										</Link>
+									)
+								})
+							}
 						</Grid>
 					</Container>
 				</TemplateDefault>
 			</main>
 		</>
 	);
+}
+
+export async function getServerSideProps() {
+    await dbConnect()
+
+    const products = await ProductsModel.aggregate([{
+		$sample: { size: 9 }
+	}])
+
+    return {
+        props: {
+            products: JSON.parse(JSON.stringify(products))
+        }
+    }
 }
