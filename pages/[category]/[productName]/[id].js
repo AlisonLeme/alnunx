@@ -12,11 +12,14 @@ import {
     CardMedia
 } from '@mui/material'
 
-import TemplateDefault from '../../src/templates/default/Default'
+import TemplateDefault from '../../../src/templates/default/Default'
+import dbConnect from '../../../src/utils/dbConnect'
+import ProductsModel from '../../../src/models/products'
+import { formatCurrency } from '../../../src/utils/currency'
 
 import styles from './product.module.css'
 
-const Product = () => {
+const Product = ({ product }) => {
     return (
         <TemplateDefault>
             <Container maxWidth='lg'>
@@ -33,53 +36,55 @@ const Product = () => {
                                     }
                                 }}
                             >
-                                <Card className={styles.card}>
-                                    <CardMedia
-                                        className={styles.cardMedia}
-                                        image={'https://source.unsplash.com/random?a=1'}
-                                        title={'Title image'}
-                                    />
-                                </Card>
-                                <Card className={styles.card}>
-                                    <CardMedia
-                                        className={styles.cardMedia}
-                                        image={'https://source.unsplash.com/random?a=2'}
-                                        title={'Title image'}
-                                    />
-                                </Card>
+                                {
+                                    product.files.map((file) => {
+                                        return (
+                                            <Card key={file.name} className={styles.card}>
+                                                <CardMedia
+                                                    className={styles.cardMedia}
+                                                    image={`/uploads/${file.name}`}
+                                                    title={product.title}
+                                                />
+                                            </Card>
+                                        )
+                                    })
+                                }
                             </Carousel>
                         </Box>
                         <Box className={styles.box}>
                             <Typography component={'span'} variant={'caption'}>
-                                Publicado 22 abril 2022
+                                Publicado 22 abril 2022 -- TO DO
                             </Typography>
                             <Typography component={'h4'} variant={'h4'} className={styles.productName}>
-                                Produto X
+                                { product.title }
                             </Typography>
                             <Typography component={'h4'} variant={'h4'} className={styles.price}>
-                                R$ 90,00
+                                { formatCurrency(product.price) }
                             </Typography>
-                            <Chip label={'Categoria'} />
+                            <Chip label={product.category}/>
                         </Box>
                         <Box className={styles.box}>
                             <Typography component={'h6'} variant={'h6'}>
                                 Descrição
                             </Typography>
                             <Typography component={'p'} variant={'body2'}>
-                                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32.
+                                { product.description }
                             </Typography>
                         </Box>
                     </Grid>
                     <Grid item xs={4}>
                         <Card className={styles.box} elevation={0}>
                             <CardHeader
-                                avatar={<Avatar>A</Avatar>}
-                                title={'Alison Leme'}
-                                subheader={'alisonletos@gmail.com'}
+                                avatar={
+                                <Avatar src={product.user.image}>
+                                    { product.user.image || product.user.name[0] }
+                                </Avatar>}
+                                title={product.user.name}
+                                subheader={product.user.email}
                             />
                             <CardMedia
-                                image={'https://source.unsplash.com/random'}
-                                title={'Alison Leme'}
+                                image={product.user.image}
+                                title={product.user.name}
                             />
                         </Card>
 
@@ -96,6 +101,20 @@ const Product = () => {
             </Container>
         </TemplateDefault>
     )
+}
+
+export async function getServerSideProps({ query }) {
+    const { id } = query
+
+    await dbConnect()
+
+    const product = await ProductsModel.findOne({ _id: id })
+
+    return {
+        props: {
+            product: JSON.parse(JSON.stringify(product))
+        }
+    }
 }
 
 export default Product

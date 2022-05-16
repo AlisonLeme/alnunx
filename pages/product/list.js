@@ -13,7 +13,7 @@ import Card from '../../src/components/card/Card'
 
 import SearchIcon from '@mui/icons-material/Search';
 
-import styles from './product.module.css'
+import styles from './listProduct.module.css'
 
 const List = () => {
     return (
