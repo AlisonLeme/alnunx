@@ -5,19 +5,15 @@ import slugify from "slugify";
 import {
   Container,
   Grid,
-  IconButton,
-  InputBase,
-  Paper,
   Typography,
 } from '@mui/material';
-
-import SearchIcon from '@mui/icons-material/Search';
 
 import TemplateDefault from '../src/templates/default/Default'
 import Card from '../src/components/card/Card';
 import dbConnect from '../src/utils/dbConnect'
 import ProductsModel from '../src/models/products'
 import { formatCurrency } from '../src/utils/currency'
+import SerachInput from "../src/components/SearchInput/SearchInput";
 
 import styles from "../styles/Home.module.css";
 
@@ -35,15 +31,7 @@ export default function Home({ products }) {
 						<Typography component="h1" variant='h3' align='center'>
 							O que deseja encontrar?
 						</Typography>
-						<Paper className={styles.searchPaper}>
-							<InputBase
-								placeholder='ex: iPhone 12 com garantia'
-								fullWidth
-							/>
-							<IconButton>
-								<SearchIcon />
-							</IconButton>
-						</Paper>
+						<SerachInput />
 					</Container>
 
 					<Container maxWidth='lg' className={styles.cardGrid}>
